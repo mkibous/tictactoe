@@ -115,3 +115,16 @@ body
 {
     background-color: #4E4FEB;
 }
+.container
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    transition: 0.5s;
+}
+.c
+{
+    background-color: white;
+    padding: 40px;
+    border: 1px solid black;
+    transition: 0.5s;
+}

@@ -1,4 +1,8 @@
-var mode;
+let mode;
+let cases = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let p1 = 0;
+let p2 = 0;
+let turn = 1;
 if (localStorage.getItem('mode')) {
     mode = localStorage.getItem('mode');
 }
@@ -6,9 +10,9 @@ else {
     mode = 'light';
 }
 function Mode() {
-var bod = document.getElementById('bod');
-var sw = document.getElementById('switch');
-var sercle = document.getElementById('sercle');
+let bod = document.getElementById('bod');
+let sw = document.getElementById('switch');
+let sercle = document.getElementById('sercle');
     if (mode == 'light') {
         bod.style.backgroundColor = '#EEEEEE';
         bod.style.color = 'black';
