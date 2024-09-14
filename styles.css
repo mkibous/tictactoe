@@ -89,12 +89,12 @@ body
 .c
 {
     background-color: white;
-    padding: 40px;
+    height: 80px;
+    width: 80px;
     border: 1px solid black;
     cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    display: flex;
+    justify-content: center;
     transition: 0.5s;
 }
 #reset

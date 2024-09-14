@@ -4,7 +4,8 @@ let p1 = 0;
 let p2 = 0;
 let p1_n = 'x';
 let img_p1 = 'url(x.png)';
-let img_p2 = 'url(o.png)'; 
+let img_p2 = 'url(o.png)';
+let blinkAnimations = {};
 let turn = 1;
 let end = 0;
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -51,29 +52,32 @@ function turn1(t){
         document.getElementById('pp2').style.backgroundColor = '#068FFF';
         document.getElementById('pp1').style.backgroundColor = '#068fff00';}
 }
+
 // turn1(turn);
 function play(id){
     if(end == 1)
         return;
     if(p1_n == 'x'){
-        img_p1 = 'url(x.png)';
-        img_p2 = 'url(o.png)';
+        img_p1 = 'x.png';
+        img_p2 = 'o.png';
     }
     else{
-        img_p1 = 'url(o.png)';
-        img_p2 = 'url(x.png)';
+        img_p1 = 'o.png';
+        img_p2 = 'x.png';
     }
     console.log(id);
     let box = document.getElementById(id);
     if (cases[id - 1] == 0) {
         if (turn == 1) {
-            box.style.backgroundImage = img_p1;
+            box.src = img_p1;
+            animate_l(id);
             cases[id - 1] = 1;
             turn = 2;
             document.getElementById('turn').innerHTML = 'Player 2 turn';
         }
         else {
-            box.style.backgroundImage = img_p2;
+            box.src = img_p2;
+            animate_r(id);
             cases[id - 1] = -1;
             turn = 1;
             document.getElementById('turn').innerHTML = 'Player 1 turn';
@@ -90,65 +94,81 @@ function check(){
     switch (cases[0] + cases[1] + cases[2]) {
         case 3:
             pl1 = 2;
+            win_blink('1', '2', '3');
             break;
         case -3:
             pl2 = 1;
+            win_blink('1', '2', '3');
             break;
     }
     switch (cases[3] + cases[4] + cases[5]) {
         case 3:
             pl1 = 2;
+            win_blink('4', '5', '6');
             break;
         case -3:
             pl2 = 1;
+            win_blink('4', '5', '6');
             break;
     }
     switch (cases[6] + cases[7] + cases[8]) {
         case 3:
             pl1 = 2;
+            win_blink('7', '8', '9');
             break;
         case -3:
             pl2 = 1;
+            win_blink('7', '8', '9');
             break;
     }
     switch (cases[0] + cases[3] + cases[6]) {
         case 3:
             pl1 = 2;
+            win_blink('1', '4', '7');
             break;
         case -3:
             pl2 = 1;
+            win_blink('1', '4', '7');
             break;
     }
     switch (cases[1] + cases[4] + cases[7]) {
         case 3:
             pl1 = 2;
+            win_blink('2', '5', '8');
             break;
         case -3:
             pl2 = 1;
+            win_blink('2', '5', '8');
             break;
     }
     switch (cases[2] + cases[5] + cases[8]) {
         case 3:
             pl1 = 2;
+            win_blink('3', '6', '9');
             break;
         case -3:
             pl2 = 1;
+            win_blink('3', '6', '9');
             break;
     }
     switch (cases[0] + cases[4] + cases[8]) {
         case 3:
             pl1 = 2;
+            win_blink('1', '5', '9');
             break;
         case -3:
             pl2 = 1;
+            win_blink('1', '5', '9');
             break;
     }
     switch (cases[2] + cases[4] + cases[6]) {
         case 3:
             pl1 = 2;
+            win_blink('3', '5', '7');
             break;
         case -3:
             pl2 = 1;
+            win_blink('3', '5', '7');
             break;
     }
 if(pl1 == 2){
@@ -180,8 +200,9 @@ if(end == 1){
 }
 }
 function reset(){
+    stopBlinks();
     for (let i = 1; i <= 9; i++) {
-        document.getElementById(i).style.backgroundImage = '';
+        document.getElementById(i).src = '';
         cases[i - 1] = 0;
     }
     end = 0;
@@ -198,4 +219,91 @@ function reset(){
     turn1(turn);
     document.getElementById('reset').style.display = 'none';
 }
-  
+function animate_r(id){
+    document.getElementById(id).animate([
+        {
+            offset: 0,
+            transform: "translateX(800px) rotateY(30deg) scale(6.5)",
+            transformOrigin: "-100% 50%",
+            opacity: 0
+        },
+        {
+            offset: 1,
+            transform: "translateX(0) rotateY(0) scale(1)",
+            transformOrigin: "600px 50%",
+            opacity: 1
+        }
+    ],{				 
+        duration: 500,
+        easing: 'linear',
+        delay: 0,
+        iterations: 1,
+        direction: 'normal',
+        fill: 'none'
+    })}
+function animate_l(id){
+    document.getElementById(id).animate([
+        {
+            offset: 0,
+            transform: "translateX(-800px) rotateY(-30deg) scale(6.5)",
+            transformOrigin: "200% 50%",
+            opacity: 0
+        },
+        {
+            offset: 1,
+            transform: "translateX(0) rotateY(0) scale(1)",
+            transformOrigin: "-600px 50%",
+            opacity: 1
+        }
+    ],{				 
+        duration: 500,
+        easing: 'linear',
+        delay: 0,
+        iterations: 1,
+        direction: 'normal',
+        fill: 'none'
+    })
+}
+function win_blink(id1, id2, id3){
+    blink(id1);
+    blink(id2);
+    blink(id3);
+}
+function blink(id){
+    const element = document.getElementById(id);
+    blinkAnimations[id] = element.animate([
+	{
+		offset: 0,
+		opacity: 1
+	},
+	{
+		offset: 0.25,
+		opacity: 0
+	},
+	{
+		offset: 0.5,
+		opacity: 1
+	},
+	{
+		offset: 0.75,
+		opacity: 0
+	},
+	{
+		offset: 1,
+		opacity: 1
+	}
+],{				 
+	duration: 1000,
+	easing: 'linear',
+	delay: 0,
+	iterations: Infinity,
+	direction: 'normal',
+	fill: 'none'
+})
+}
+function stopBlinks(){
+    for (const id in blinkAnimations) {
+        blinkAnimations[id].cancel();
+    }
+    blinkAnimations = {};
+}
