@@ -8,6 +8,7 @@ let img_p2 = 'url(o.png)';
 let blinkAnimations = {};
 let turn = 1;
 let end = 0;
+let comp_turn = 0;
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   mode = 'dark';
 } else {
@@ -86,6 +87,58 @@ function play(id){
     check();
     if(end == 0)
         turn1(turn);
+}
+function comp(){
+    if(p1_n == 'x'){
+        img_p1 = 'x.png';
+        img_p2 = 'o.png';
+    }
+    else{
+        img_p1 = 'o.png';
+        img_p2 = 'x.png';
+    }
+    if(end == 0){
+        let com = Math.floor(getRandomInRange(0, 9));
+        while(cases[com] != 0){
+            com = Math.floor(getRandomInRange(0, 9));
+        }
+        box = document.getElementById(com + 1);
+        box.src = img_p2;
+        animate_r(com + 1);
+        cases[com] = -1;
+        turn = 1;
+        document.getElementById('turn').innerHTML = 'Player turn';
+        check();
+        if(end == 0)
+            turn1(turn);
+}}
+function plav_vs_com(id){
+    comp_turn = 1;
+    if(end == 1)
+        return;
+    if(p1_n == 'x'){
+        img_p1 = 'x.png';
+        img_p2 = 'o.png';
+    }
+    else{
+        img_p1 = 'o.png';
+        img_p2 = 'x.png';
+    }
+    console.log(id);
+    let box = document.getElementById(id);
+    if (cases[id - 1] == 0) {
+        if (turn == 1) {
+            box.src = img_p1;
+            animate_l(id);
+            cases[id - 1] = 1;
+            turn = 2;
+            document.getElementById('turn').innerHTML = 'Computer turn';
+            check();
+            if(end == 0)
+                turn1(turn);
+            setTimeout(() => {comp();}, 1000);
+        }
+    }
 }
 function check(){
     let pl1 = 0;
@@ -179,6 +232,9 @@ if(pl1 == 2){
 }
 if(pl2 == 1){
     document.getElementById('turn').innerHTML = 'Player 2 win';
+    if(comp_turn == 1){
+        document.getElementById('turn').innerHTML = 'Computer win';
+    }
     p2++;
     document.getElementById('p2').innerHTML = p2;
     end = 1;
@@ -208,8 +264,14 @@ function reset(){
     end = 0;
     if(p1_n == 'x'){
         p1_n = 'o';
-        document.getElementById('turn').innerHTML = 'Player 2 turn';
         turn = 2;
+        if(comp_turn == 1){
+            document.getElementById('turn').innerHTML = 'Computer turn';
+            setTimeout(() => {comp();}, 1000);
+        }
+        else{
+            document.getElementById('turn').innerHTML = 'Player 2 turn';
+        }
     }
     else{
         p1_n = 'x';
@@ -307,3 +369,6 @@ function stopBlinks(){
     }
     blinkAnimations = {};
 }
+function getRandomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
