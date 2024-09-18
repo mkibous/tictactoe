@@ -100,6 +100,17 @@ function comp(){
         while(cases[com] != 0){
             com = Math.floor(getRandomInRange(0, 8));
         }
+        // let tmp = Math.floor(getRandomInRange(0, 8));
+        // while(cases[com] != 0){
+        //     if()
+        //     com = Math.floor(getRandomInRange(0, 8));
+        // }
+        cases[0] == 0 ? com = 0 : com = com;
+        cases[2] == 0 ? com = 2 : com = com;
+        cases[6] == 0 ? com = 6 : com = com;
+        cases[8] == 0 ? com = 8 : com = com;
+        cases[4] == 0 ? com = 4 : com = com;
+        console.log(com);
         if (min_max(-1) != -1)
             com = min_max(-1);
         else if (min_max(1) != -1)
