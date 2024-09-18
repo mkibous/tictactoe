@@ -45,7 +45,6 @@ function opennewwindow(url) {
 }
 function turn1(t){
     if(t == 1){
-        console.log('1');
         document.getElementById('pp1').style.backgroundColor = '#068FFF';
         document.getElementById('pp2').style.backgroundColor = '#068fff00';
     }
@@ -66,7 +65,6 @@ function play(id){
         img_p1 = 'o.png';
         img_p2 = 'x.png';
     }
-    console.log(id);
     let box = document.getElementById(id);
     if (cases[id - 1] == 0) {
         if (turn == 1) {
@@ -98,10 +96,14 @@ function comp(){
         img_p2 = 'x.png';
     }
     if(end == 0){
-        let com = Math.floor(getRandomInRange(0, 9));
+        let com = Math.floor(getRandomInRange(0, 8));
         while(cases[com] != 0){
-            com = Math.floor(getRandomInRange(0, 9));
+            com = Math.floor(getRandomInRange(0, 8));
         }
+        if (min_max(-1) != -1)
+            com = min_max(-1);
+        else if (min_max(1) != -1)
+            com = min_max(1);
         box = document.getElementById(com + 1);
         box.src = img_p2;
         animate_r(com + 1);
@@ -124,7 +126,6 @@ function plav_vs_com(id){
         img_p1 = 'o.png';
         img_p2 = 'x.png';
     }
-    console.log(id);
     let box = document.getElementById(id);
     if (cases[id - 1] == 0) {
         if (turn == 1) {
@@ -143,7 +144,6 @@ function plav_vs_com(id){
 function check(){
     let pl1 = 0;
     let pl2 = 0;
-    console.log(cases);
     switch (cases[0] + cases[1] + cases[2]) {
         case 3:
             pl1 = 2;
@@ -372,3 +372,44 @@ function stopBlinks(){
 function getRandomInRange(min, max) {
     return Math.random() * (max - min) + min;
   }
+function check_win(cop){
+    let draw = 0;
+    for (let i = 0; i < 9; i += 3) {
+        if(cop[i] != 0 && cop[i] == cop[i + 1] && cop[i] == cop[i + 2]){
+            return 1;
+        }
+    }
+    for (let i = 0; i < 3; i++) {
+        if(cop[i] != 0 && cop[i] == cop[i + 3] && cop[i] == cop[i + 6]){
+            return 1;
+        }
+    }
+    if(cop[0] != 0 && cop[0] == cop[4] && cop[0] == cop[8]){
+        return 1;
+    }
+    if(cop[2] != 0 && cop[2] == cop[4] && cop[2] == cop[6]){
+        return 1;
+    }
+    for (let i = 0; i < 9; i++) {
+        if(cases[i] != 0){
+            draw++;
+        }
+    }
+    if(draw == 9){
+        return 0;
+    }
+    return 0;}
+function min_max(s){
+let cop = cases;
+    for (let i = 0; i < 9; i++) {
+        if(cop[i] == 0){
+            cop[i] = s;
+            if(check_win(cop) == 1){
+                cop[i] = 0;
+                return i;
+            }
+            cop[i] = 0;
+        }
+    }
+    return -1;
+}
