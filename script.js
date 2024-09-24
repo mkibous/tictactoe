@@ -105,20 +105,20 @@ function comp(){
         //     if()
         //     com = Math.floor(getRandomInRange(0, 8));
         // }
-        cases[0] == 0 ? com = 0 : com = com;
-        cases[2] == 0 ? com = 2 : com = com;
-        cases[6] == 0 ? com = 6 : com = com;
-        cases[8] == 0 ? com = 8 : com = com;
-        cases[4] == 0 ? com = 4 : com = com;
+        if(cases[0] == 0 || cases[2] == 0 || cases[6] == 0 || cases[8] == 0 || cases[4] == 0){
+            com = Math.floor(getRandomInRange(0, 4)) * 2;
+            while(cases[com] != 0){
+                com = Math.floor(getRandomInRange(0, 4)) * 2;}
+        }
         console.log(com);
         if (min_max(-1) != -1)
             com = min_max(-1);
         else if (min_max(1) != -1)
             com = min_max(1);
+        cases[com] = -1;
         box = document.getElementById(com + 1);
         box.src = img_p2;
         animate_r(com + 1);
-        cases[com] = -1;
         turn = 1;
         document.getElementById('turn').innerHTML = 'Player turn';
         check();
@@ -381,7 +381,7 @@ function stopBlinks(){
     blinkAnimations = {};
 }
 function getRandomInRange(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.random() * (max - min + 1) + min;
   }
 function check_win(cop){
     let draw = 0;
