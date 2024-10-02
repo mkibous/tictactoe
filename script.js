@@ -110,6 +110,10 @@ function comp(){
             while(cases[com] != 0){
                 com = Math.floor(getRandomInRange(0, 4)) * 2;}
         }
+        if (check2() != -1)
+            com = check2();
+        if(cases[4] == 0) 
+            com = 4;
         console.log(com);
         if (min_max(-1) != -1)
             com = min_max(-1);
@@ -125,6 +129,18 @@ function comp(){
         if(end == 0)
             turn1(turn);
 }}
+function check2(){
+    let i = -1;
+    if((cases[0] == 1 && cases[4] == -1 && cases[8] == 1) || (cases[2] == 1 && cases[4] == -1 && cases[6] == 1))
+    {
+        i = (Math.floor(getRandomInRange(0, 3)) * 2) + 1;
+        while(cases[i] != 0){
+            i = (Math.floor(getRandomInRange(0, 3)) * 2) + 1;
+        }
+    }
+    console.log("i : " + i);
+    return i;
+}
 function plav_vs_com(id){
     comp_turn = 1;
     if(end == 1)

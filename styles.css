@@ -1,136 +1,124 @@
 @font-face {
-    font-family: 'poppins';
-    src: url('fonts/poppins-regular-webfont.woff2') format('woff2'),
-         url('fonts/poppins-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "poppins";
+  src: url("fonts/poppins-regular-webfont.woff2") format("woff2"),
+    url("fonts/poppins-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
-body
-{
-    margin: 0;
-    font-family: poppins;
-    font-weight: 600;
-    padding: 0;
-    background-color: #EEEEEE;
-    transition: 0.5s;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+body {
+  margin: 0;
+  font-family: poppins;
+  font-weight: 600;
+  padding: 0;
+  background-color: #eeeeee;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-#hd
-{
-    display: flex;
-    flex-direction: row;
-    border-radius: 5px;
-    position: sticky;
-    height: 10vh;
-    top: 0;
-    background-color: #e1e1e1;
-    border-bottom: 1px solid grey;
-    transition: 0.5s;
+#hd {
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  position: sticky;
+  height: 10vh;
+  top: 0;
+  background-color: #e1e1e1;
+  border-bottom: 1px solid grey;
+  transition: 0.5s;
 }
-#modeBtn
-{
-    height: 40px;
-    width: 70px;
-    margin-left: 50px;
-    margin-top: 15px;
-    border: 1px solid black;
-    border-radius: 20px;
-    background-image: url('moon.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    transition: 0.5s;
+#modeBtn {
+  height: 40px;
+  width: 70px;
+  margin-left: 50px;
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-image: url("moon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: 0.5s;
 }
-#bt1
-{
-    margin-left: 50px;
-    margin-top: 15px;
-    cursor: pointer;
-    background-color: #068FFF;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 20px;
-    transition: 0.5s;
+#bt1 {
+  margin-left: 50px;
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: #068fff;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
-#bt2
-{
-    margin-left: 50px;
-    margin-top: 15px;
-    cursor: pointer;
-    background-color: #068FFF;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 20px;
-    transition: 0.5s;
+#bt2 {
+  margin-left: 50px;
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: #068fff;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
-#bt1:hover
-{
-    background-color: #4E4FEB;
+#bt1:hover {
+  background-color: #4e4feb;
 }
-#bt2:hover
-{
-    background-color: #4E4FEB;
+#bt2:hover {
+  background-color: #4e4feb;
 }
-.container
-{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    transition: 0.5s;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  transition: 0.5s;
 }
-.c
-{
-    background-color: white;
-    height: 80px;
-    width: 80px;
-    border: 1px solid black;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    transition: 0.5s;
+.c {
+  background-color: white;
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
 }
-#reset
-{
-    margin-top: 20px;
-    cursor: pointer;
-    background-color: #068FFF;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-family: poppins;
-    display: none;
-    transition: 0.5s;
+#reset {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #068fff;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: poppins;
+  display: none;
+  transition: 0.5s;
 }
-.turn{
-    margin: 20px;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    background-color: #068fff00;
-    font-family: poppins;
-    transition: 0.5s;
+.turn {
+  margin: 20px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #068fff00;
+  font-family: poppins;
+  transition: 0.5s;
 }
-#pp1
-{
-    background-color: #068FFF;
+#pp1 {
+  background-color: #068fff;
 }
 #home {
-    margin-left: 50px;
-    margin-top: 15px;
-    cursor: pointer;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 20px;
-    transition: 0.5s;
+  margin-left: 50px;
+  margin-top: 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
